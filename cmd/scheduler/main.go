@@ -30,7 +30,9 @@ import (
 	"sigs.k8s.io/scheduler-plugins/pkg/preemptiontoleration"
 	"sigs.k8s.io/scheduler-plugins/pkg/qos"
 	"sigs.k8s.io/scheduler-plugins/pkg/trimaran/loadvariationriskbalancing"
-	"sigs.k8s.io/scheduler-plugins/pkg/trimaran/targetloadpacking"
+
+	//"sigs.k8s.io/scheduler-plugins/pkg/trimaran/targetloadpacking"
+	"sigs.k8s.io/scheduler-plugins/pkg/trimaran/powersaving"
 
 	// Ensure scheme package is initialized.
 	_ "sigs.k8s.io/scheduler-plugins/apis/config/scheme"
@@ -47,9 +49,10 @@ func main() {
 		app.WithPlugin(noderesources.AllocatableName, noderesources.NewAllocatable),
 		app.WithPlugin(noderesourcetopology.Name, noderesourcetopology.New),
 		app.WithPlugin(preemptiontoleration.Name, preemptiontoleration.New),
-		app.WithPlugin(targetloadpacking.Name, targetloadpacking.New),
+		app.WithPlugin(powersaving.Name, powersaving.New),
 		// Sample plugins below.
 		// app.WithPlugin(crossnodepreemption.Name, crossnodepreemption.New),
+		// app.WithPlugin(targetloadpacking.Name, targetloadpacking.New),
 		app.WithPlugin(podstate.Name, podstate.New),
 		app.WithPlugin(qos.Name, qos.New),
 	)

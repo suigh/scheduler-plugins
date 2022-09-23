@@ -37,6 +37,7 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&CoschedulingArgs{},
 		&NodeResourcesAllocatableArgs{},
 		&TargetLoadPackingArgs{},
+		&PowerSavingArgs{},
 		&LoadVariationRiskBalancingArgs{},
 		&NodeResourceTopologyMatchArgs{},
 		&PreemptionTolerationArgs{},

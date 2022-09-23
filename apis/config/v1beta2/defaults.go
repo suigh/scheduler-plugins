@@ -49,6 +49,13 @@ var (
 	// DefaultTargetUtilizationPercent Recommended to keep -10 than desired limit.
 	DefaultTargetUtilizationPercent int64 = 40
 
+	// Defaults for PowerSavingArgs plugin
+
+	// DefaultLowCPUThreshold is 10, it is a practical value.
+	DefaultLowCPUThreshold int64 = 10
+	// DefaultHighCPUThreshold is 30, it is a practical value.
+	DefaultHighCPUThreshold int64 = 30
+
 	// Defaults for LoadVariationRiskBalancing plugin
 
 	// Risk is usually calculated as average (aka. mu) plus standard deviation (aka. sigma).
@@ -105,6 +112,22 @@ func SetDefaults_TargetLoadPackingArgs(args *TargetLoadPackingArgs) {
 	}
 	if args.TargetUtilization == nil || *args.TargetUtilization <= 0 {
 		args.TargetUtilization = &DefaultTargetUtilizationPercent
+	}
+	if args.WatcherAddress == nil && args.MetricProvider.Type == "" {
+		args.MetricProvider.Type = MetricProviderType(DefaultMetricProviderType)
+	}
+	if args.MetricProvider.Type == Prometheus && args.MetricProvider.InsecureSkipVerify == nil {
+		args.MetricProvider.InsecureSkipVerify = &DefaultInsecureSkipVerify
+	}
+}
+
+// SetDefaults_PowerSavingArgs sets the default parameters for PowerSaving plugin
+func SetDefaults_PowerSavingArgs(args *PowerSavingArgs) {
+	if args.LowCPUThreshold == nil || *args.LowCPUThreshold <= 0 {
+		args.LowCPUThreshold = &DefaultLowCPUThreshold
+	}
+	if args.HighCPUThreshold == nil || *args.HighCPUThreshold <= 0 {
+		args.HighCPUThreshold = &DefaultHighCPUThreshold
 	}
 	if args.WatcherAddress == nil && args.MetricProvider.Type == "" {
 		args.MetricProvider.Type = MetricProviderType(DefaultMetricProviderType)

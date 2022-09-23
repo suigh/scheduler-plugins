@@ -102,6 +102,22 @@ type TargetLoadPackingArgs struct {
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
+// PowerSavingArgs holds arguments used to configure PowerSaving plugin.
+type PowerSavingArgs struct {
+	metav1.TypeMeta `json:",inline"`
+
+	// Low CPU Utilization threshold
+	LowCPUThreshold *int64 `json:"lowCPUThreshold,omitempty"`
+	// High CPU Utilization threshold
+	HighCPUThreshold *int64 `json:"highCPUThreshold,omitempty"`
+	// Specify the metric provider type, address and token using MetricProviderSpec
+	MetricProvider MetricProviderSpec `json:"metricProvider,omitempty"`
+	// Address of load watcher service
+	WatcherAddress *string `json:"watcherAddress,omitempty"`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
 // LoadVariationRiskBalancingArgs holds arguments used to configure LoadVariationRiskBalancing plugin.
 type LoadVariationRiskBalancingArgs struct {
 	metav1.TypeMeta `json:",inline"`

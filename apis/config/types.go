@@ -106,6 +106,20 @@ type TargetLoadPackingArgs struct {
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
+// PowerSavingArgs holds arguments used to configure PowerSaving plugin.
+type PowerSavingArgs struct {
+	metav1.TypeMeta
+
+	// Common parameters for trimaran plugins
+	TrimaranSpec
+	// Low CPU Utilization threshold
+	LowCPUThreshold int64
+	// High CPU Utilization threshold
+	HighCPUThreshold int64
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
 // LoadVariationRiskBalancingArgs holds arguments used to configure LoadVariationRiskBalancing plugin.
 type LoadVariationRiskBalancingArgs struct {
 	metav1.TypeMeta
